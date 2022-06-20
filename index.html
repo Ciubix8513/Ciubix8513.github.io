@@ -1,0 +1,72 @@
+<html lang="en">    
+<head>
+    <title>Ciubix</title>
+    <meta name="Ciubix" content="My stuff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="Fractal.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="TestRender.js"></script>
+</head>
+
+<body>
+
+    <div>
+        
+        <h1 onclick="generalKenobi()" title="General Kenobi"> Hello there</h1>
+        <script>
+            function generalKenobi() { alert("Ahh.. General Kenobi."); }
+        </script>
+        Well this is my website<br>
+        I know it's ugly as hell<br>
+        Don't worry I'm working on
+        <div>
+
+            <h1>Now onto some more fancy stuff</h1>
+            <canvas id="glCanvas" width="640" height="480" title="Fractal" aria-placeholder="Fractal"></canvas>
+            <div class="container">
+                <div class="left">MSAA</div>
+                <div class="center"><input type="range" min="1" max="20" value="2" id="MSAA" class="slider"
+                        onchange="SlScript('MSAA','MSAAin')"></div>
+                <div class="right"><input type="number" min="1" max="20" value="2" style="width: 50%" id="MSAAin"
+                        onchange="InScript('MSAA','MSAAin',1,20)"></div>
+            </div>
+            <div class="container">
+                <div class="left">Max iter</div>
+                <div class="center"><input type="range" min="1" max="2000" value="1000" id="Miter"
+                        onchange="SlScript('Miter','MitterIn')"></div>
+                <div class="right"><input type="number" min="1" max="2000" style="width: 50%" id="MitterIn"
+                        onchange="InScript('Miter','MitterIn',1,2000)" value="1000"></div>
+            </div>
+            <div class="container">
+                <div class="left">Color num</div>
+                <div class="center"> <input type="range" min="1" max="1000" value="100" id="Cnum" class="slider"
+                        onchange="SlScript('Cnum','CnumIn')"></div>
+                <div class="right"><input type="number" min="1" max="1000" style="width: 50%" value="100" id="CnumIn"
+                        onchange="InScript('Cnum','CnumIn',1,1000)"></div>
+            </div>
+            <!--list -->
+            <div class=".center">
+                <button class="btn">add</button> <button class="btn">clear</button>
+                <ul id="list">
+                    
+                </ul>
+            </div>
+
+
+            <button id="renderBtn">render!</button>
+            <script>
+                function SlScript(slId, inId) {
+                    document.getElementById(inId).value = document.getElementById(slId).value;
+                }
+                function InScript(slId, inId, minVal, maxVal) {
+                    let val = document.getElementById(inId).value;
+                    val = Math.min(Math.max(val, minVal), maxVal);
+                    document.getElementById(inId).value = val;
+                    document.getElementById(slId).value = val;
+                }
+            </script>
+
+</body>
+
+</html>

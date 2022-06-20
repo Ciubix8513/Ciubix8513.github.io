@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(44, 44, 44);
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*body{
+    background: linear-gradient(to bottom, #55CDFC 25%,#f8A8B8 50%,#FFFFFF,#f8A8B8 80%,#55CDFC 100%);
+    font-family: cursive;
+}*/
+
+div {
+    text-align: center;
+}
+div {
+    color: white;
+}
+.container {
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    display: table;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.left,
+.center,
+.right {
+    display: table-cell;
+    border: 1px;
+    text-align: center;
+}
+.left {
+    text-align: center;
+    width: 33.3333%;
+}
+.center {
+    width: 33.3333%;
+}
+.right {
+    width: 33.3333%;
+}
+.btn {
+    width: 50px;
+    border-style: double;
+}
