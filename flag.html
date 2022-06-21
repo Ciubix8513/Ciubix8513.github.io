@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta name="Ciubix" content="A flag renderer">
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="Fractal.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="Flag.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Flag creation</h1>
+            <canvas id="glCanvas" width="720" height="480" title="Flag" aria-placeholder="Flag" style="margin-bottom: 20px;"></canvas>                      
+            <!--list -->
+            <div class=".center">
+                <button class="btn" onclick="newEl()">add</button> <button class="btn" onclick="clearLi()">clear</button>
+                <ul id="List">
+                    <li class="element"><input type="color"value="#55CDFC" ></li>
+                    <li class="element"><input type="color"value="#F7A8B8"></li>
+                    <li class="element"><input type="color"value="#FFFFFF"></li>
+                    <li class="element"><input type="color"value="#F7A8B8"></li>
+                    <li class="element"><input type="color"value="#55CDFC"></li>
+                </ul>
+            </div>            
+
+            <button class="btn"  id="renderBtn">render!</button>
+    </body>
+</html>

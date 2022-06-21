@@ -1,3 +1,4 @@
+
 function loadFromFile(fileN)
 {
     let file = "";
@@ -51,6 +52,7 @@ function render(gl, info, buffer)
 }
 
 
+
 function main()
 {
     const canvas = document.querySelector("#glCanvas");
@@ -65,7 +67,7 @@ function main()
     gl.clearColor(0.0,0.0,0.0,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    let fsSrc ="void main(){gl_FragColor = vec4(1);}";
+    let fsSrc ="void main(){gl_FragColor = vec4(0.95,0.76,0.86,1.0);}";
     let vsSrc ="attribute vec2 Pos;\nvoid main(){gl_Position = vec4(Pos,0,0);}";    
     const prog = initShProg(gl,vsSrc,fsSrc);
 
@@ -91,4 +93,32 @@ function main()
     //render(gl,info,posBuff);
     document.querySelector("#renderBtn").onclick = ()=>{ render(gl,info,posBuff)};
 }
+function SlScript(slId, inId) {
+    document.getElementById(inId).value = document.getElementById(slId).value;
+}
+function InScript(slId, inId, minVal, maxVal) {
+    let val = document.getElementById(inId).value;
+    val = Math.min(Math.max(val, minVal), maxVal);
+    document.getElementById(inId).value = val;
+    document.getElementById(slId).value = val;
+}
+function newEl()
+{
+    const li = document.createElement("li");    
+    const b = document.createElement("input")
+    b.type="color";
+    b.value="#FFFFFF"
+    li.className = "element";
+
+    li.appendChild(b);    
+    document.getElementById("List").appendChild(li);
+}
+function clearLi()
+{
+   const par = document.getElementById("List");
+   while(par.firstChild)
+   par.removeChild(par.lastChild);
+   
+}
+
 window.onload = main;
