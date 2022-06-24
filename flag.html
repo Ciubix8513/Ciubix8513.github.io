@@ -1,5 +1,6 @@
-<html>
+<html lang="en">
     <head>
+        <title>Ciubix</title>
         <meta name="Ciubix" content="A flag renderer">
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,16 +14,14 @@
             <canvas id="glCanvas" width="720" height="480" title="Flag" aria-placeholder="Flag" style="margin-bottom: 20px;"></canvas>                      
             <!--list -->
             <div class=".center">
-                <button class="btn" onclick="newEl()">add</button> <button class="btn" onclick="clearLi()">clear</button>
-                <ul id="List">
-                    <li class="element"><input type="color"value="#55CDFC" ></li>
-                    <li class="element"><input type="color"value="#F7A8B8"></li>
-                    <li class="element"><input type="color"value="#FFFFFF"></li>
-                    <li class="element"><input type="color"value="#F7A8B8"></li>
-                    <li class="element"><input type="color"value="#55CDFC"></li>
-                </ul>
-            </div>            
-
-            <button class="btn"  id="renderBtn">render!</button>
+                <button class="btn" onclick="newEl()">add</button> <button class="btn" onclick="clearLi()">clear</button>  <button class="btn"  id="capture">Download</button>
+                <div id="List" class="list">
+                    <div class="item"><input type="color"value="#55CDFC" ><br></div>
+                    <div class="item"><input type="color"value="#F7A8B8"><br></div>
+                    <div class="item"><input type="color"value="#FFFFFF"><br></div>
+                    <div class="item"><input type="color"value="#F7A8B8"><br></div>
+                    <div class="item"><input type="color"value="#55CDFC"><br></div>
+                </div>
+            </div>
     </body>
 </html>
