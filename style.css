@@ -39,12 +39,20 @@ div {
     width: 33.3333%;
 }
 .center {
-    width: 33.3333%;
+    width: 30.3333%;
 }
 .right {
     width: 33.3333%;
 }
+.list{
+    margin: 10px;
+}
+
 .btn {
-    width: 50px;
+    width: 70px;
     border-style: double;
+}
+
+.item{
+    margin: 5 px;
 }

@@ -1,3 +1,5 @@
+let capture = false;
+
 function loadFromFile(fileN) {
   let file = "";
   fetch("http://localhost" + fileN)
@@ -54,7 +56,7 @@ function initShProg(gl, vsSource, fsSource) {
 function main() {
   const canvas = document.querySelector("#glCanvas");
   const gl = canvas.getContext("webgl2");
-
+  document.getElementById("capture").onclick = () => (capture = true);
   const rect = canvas.getBoundingClientRect();
   if (gl === null) {
     alert("Srry m8 yo pc not supported");
@@ -114,27 +116,30 @@ function main() {
     attribLocations: {
       vertexPosition: 0,
       iResolution: gl.getUniformLocation(prog, "iResolution"),
-      ColNum: gl.getUniformLocation(prog,"ColNum"),
-      cols: gl.getUniformLocation(prog,"cols")
+      ColNum: gl.getUniformLocation(prog, "ColNum"),
+      cols: gl.getUniformLocation(prog, "cols"),
     },
   };
 
   render();
-  function render() {    
+  function render() {
     const par = document.getElementById("List");
     const ColArr = new Array();
- 
-    Array.from(par.children).forEach((element) => {
-      const col = hexToRgb(element.firstChild.value);
-      ColArr.push(col.r / 255.0);
-      ColArr.push(col.g / 255.0);
-      ColArr.push(col.b / 255.0);
-    });
-    
 
-    gl.uniform2f(info.attribLocations.iResolution,rect.width,rect.height);
-    gl.uniform1i(info.attribLocations.ColNum,ColArr.length / 3);
-    gl.uniform3fv(info.attribLocations.cols,new Float32Array(ColArr));
+    Array.from(par.children)
+      .reverse()
+      .forEach((element) => {
+        const col = hexToRgb(element.firstChild.value);
+        ColArr.push(col.r / 255.0);
+        ColArr.push(col.g / 255.0);
+        ColArr.push(col.b / 255.0);
+      });
+
+    gl.useProgram(info.program);
+
+    gl.uniform2f(info.attribLocations.iResolution, rect.width, rect.height);
+    gl.uniform1i(info.attribLocations.ColNum, ColArr.length / 3);
+    gl.uniform3fv(info.attribLocations.cols, new Float32Array(ColArr));
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -149,12 +154,16 @@ function main() {
       0
     );
     gl.enableVertexAttribArray(info.attribLocations.vertexPosition);
-    gl.useProgram(info.program);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
+    if (capture) {
+      capture = false;
+      const data = canvas.toDataURL();
+
+      window.open(data);
+    }
     requestAnimationFrame(render);
   }
-  
 }
 function SlScript(slId, inId) {
   document.getElementById(inId).value = document.getElementById(slId).value;
@@ -167,14 +176,18 @@ function InScript(slId, inId, minVal, maxVal) {
 }
 function newEl() {
   if (document.getElementById("List").children.length >= 32) return;
-  const li = document.createElement("li");
+  //const li = document.createElement("li");
   const b = document.createElement("input");
+  const div = document.createElement("div");
   b.type = "color";
   b.value = "#FFFFFF";
-  li.className = "element";
+  div.appendChild(b);
+  div.appendChild(document.createElement("br"));
+  div.className = "items";
+  //li.className = "element";
 
-  li.appendChild(b);
-  document.getElementById("List").appendChild(li);
+  //li.appendChild(b);
+  document.getElementById("List").appendChild(div);
 }
 function clearLi() {
   const par = document.getElementById("List");
