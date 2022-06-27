@@ -36,6 +36,10 @@ function loadShader(gl, type, source) {
   }
   return sh;
 }
+function back()
+{
+  document.location.href = "../index.html";
+}
 
 function initShProg(gl, vsSource, fsSource) {
   const vS = loadShader(gl, gl.VERTEX_SHADER, vsSource);
@@ -183,7 +187,7 @@ function newEl() {
   b.value = "#FFFFFF";
   div.appendChild(b);
   div.appendChild(document.createElement("br"));
-  div.className = "items";
+  div.className = "item";
   //li.className = "element";
 
   //li.appendChild(b);

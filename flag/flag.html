@@ -4,14 +4,17 @@
         <meta name="Ciubix" content="A flag renderer">
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="Fractal.png">
-        <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../Fractal.png">
+        <link rel="stylesheet" href="../style.css">
         <script src="Flag.js"></script>
     </head>
     <body>
+        <div class="BackBox" onclick="back()" >Back</div>
         <div>
             <h1>Flag creation</h1>
-            <canvas id="glCanvas" width="720" height="480" title="Flag" aria-placeholder="Flag" style="margin-bottom: 20px;"></canvas>                      
+            <p>This is the most overkill flag render, it uses WebGl to render flags in real time
+            It was a real pain to get it working</p>
+            <canvas id="glCanvas" width="720" height="480" title="Flag" placeholder="Flag" class="canv"></canvas>                     
             <!--list -->
             <div class=".center">
                 <button class="btn" onclick="newEl()">add</button> <button class="btn" onclick="clearLi()">clear</button>  <button class="btn"  id="capture">Download</button>

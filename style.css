@@ -4,6 +4,8 @@ body {
 
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 /*body{
@@ -16,6 +18,16 @@ div {
 }
 div {
     color: white;
+}
+.BackBox
+{
+    padding: 20px;
+    background-color: rgb(170, 170, 170);
+    cursor: pointer;
+}
+.canv
+{
+    margin-bottom: 20 px;
 }
 .container {
     text-align: center;
