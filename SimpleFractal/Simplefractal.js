@@ -45,15 +45,60 @@ function main() {
   let fsSrc = `#version 300 es
     precision highp float;   
 
+    uniform vec2 iResolution;
     out vec4 FragColor;
      
-    uniform vec2 iResolution;
-    uniform int ColNum;
-    uniform vec3 cols[32];
+    vec4 getCol(float coord,int ColNum) //From my other shader https://www.shadertoy.com/view/fdScRt
+    { 
+        //Make these uniforms and allow user to select colors
+        vec4[] cols =vec4[] (vec4(85,205,252,255),vec4(247,168,184,255),vec4(255),vec4(247,168,184,255),vec4(85,205,252,255));       
+        //vec4[] cols1 = vec4[] (vec4(255,0,24,255),vec4(255,165,44,255),vec4(255,255,65,255),vec4(0,128,24,255),vec4(0,0,249,255),vec4(134,0,125,255));
+        int arrLength = 5;
+        
+        if(ColNum == 1) 
+            return cols[0];
+            
+        float cstep1 = 1.0 / float(ColNum - 1);//Num of subgradients = num of colors - 1
+        
+        for(int i = 1; i < ColNum; i++)
+        {
+            if(coord < cstep1 * float(i))
+            return mix(cols[int(mod(float(i-1),float(arrLength)))],cols[int(mod(float(i),float(arrLength)))], coord / cstep1 - float (i - 1));
+        }    
+        return vec4(coord);
+    }
     
-    void main()
+    
+    
+    
+    vec4 GetColor(vec2 uv,float i,float maxI)
     {
-        FragColor = vec4(1,0,0,1);
+       if(i == maxI)
+           return vec4(0);
+        return getCol((maxI * .15 + i)  / maxI,200) / 255.;
+    }
+    
+    void main( )
+    {    
+        vec2 MinVals = vec2(-1.05,-0.5); 
+        vec2 uv = (gl_FragCoord.xy / iResolution.y);//Get ss coords
+        uv = (uv + MinVals)  / 0.35; //Offset and scale ss coords     
+        
+        vec2 coords = vec2(0);    
+        vec2 coords2 = vec2(0);
+        int iter = 0;
+        int maxIter = 1000;
+        //Optimised escape time algorithm https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set
+        while(dot(coords,coords)<= 4.0 && iter < maxIter)
+        {
+            coords.y = 2.0* coords.x * coords.y + uv.y;
+            coords.x = coords2.x - coords2.y + uv.x;
+            coords2 = coords * coords;
+            iter++;
+        }    
+        // Output to screen
+        FragColor =  GetColor(uv,float(iter) , float(maxIter));
+        FragColor.w = 1.0;
     }`;
   let vsSrc = `#version 300 es
     layout (location = 0) in vec2 Pos;
@@ -83,7 +128,8 @@ function main() {
   render();
   function render() {
     gl.useProgram(info.program);
-
+      
+    gl.uniform2f(info.attribLocations.iResolution,rect.width,rect.height);
     gl.clearColor(0.0, 1.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.bindBuffer(gl.ARRAY_BUFFER, posBuff);
@@ -97,7 +143,7 @@ function main() {
     );
     gl.enableVertexAttribArray(info.attribLocations.vertexPosition);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
+   // requestAnimationFrame(render);
   }
 }
 

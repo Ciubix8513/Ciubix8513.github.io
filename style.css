@@ -23,8 +23,18 @@ div {
 {
     padding: 20px;
     background-color: rgb(170, 170, 170);
-    cursor: pointer;
+    cursor: pointer;    
 }
+.BackBox:hover
+{
+    box-shadow: black;
+    -webkit-box-shadow: 0 10px 6px -6px black;
+	   -moz-box-shadow: 0 10px 6px -6px black;
+	        box-shadow: 0 10px 6px -6px black;
+    
+    
+}
+
 .canv
 {
     margin-bottom: 20 px;
